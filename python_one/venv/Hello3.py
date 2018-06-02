@@ -1,0 +1,11 @@
+print('中文编码')
+classMates = ['xiaoming','xiaohong','xiaolan']
+print(classMates)
+print(len(classMates))
+print(classMates[0])
+print(classMates[1])
+print(classMates[2])
+#print(classMates[3])
+classMates.append("yizhicheng")
+print(len(classMates))
+print(classMates[3])

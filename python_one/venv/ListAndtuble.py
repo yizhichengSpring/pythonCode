@@ -43,7 +43,7 @@ print(len(twoClass))
 #tuple 一旦定义 不能修改 安全啊
 threeClass = ('周杰伦','林俊杰')
 print(threeClass)
-print(threeClass[1])
+print(threeClass)
 #陷阱
 t = (1,2)
 print(t)

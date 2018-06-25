@@ -7,6 +7,7 @@ class Student():
     def test(self):
         print('name:'+self.name)
         print('age:'+str(self.age))
+        
 
 
 stu = Student()

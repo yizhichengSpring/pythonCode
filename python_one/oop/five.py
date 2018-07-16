@@ -2,6 +2,9 @@ class Animal(object):
     def print_info(self):
         print('Animal is running')
 
+    def run_twich(animal):
+        animal.print_info()
+
 
 
 #animal = Animal()
@@ -21,7 +24,11 @@ class Dog(Animal):
 
 
 
-cat = Cat()
-cat.print_info()
-dog = Dog()
-dog.print_info()
+# cat = Cat()
+# cat.print_info()
+# dog = Dog()
+# dog.print_info()
+
+animal = Animal()
+animal.run_twich(Animal())
+

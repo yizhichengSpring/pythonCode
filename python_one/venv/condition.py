@@ -13,7 +13,7 @@ else:
 # else:
 #     print("高中生")
 
-#test
+#oop-test
 height = 1.75
 weight = 80.5
 

@@ -21,7 +21,7 @@ def say(name,age):
     print(name,'您今年',age,'岁了')
     return  name,age
 
-#test
+#oop-test
 def quadratic(a,b,c):
     result=a+b+c
     return  result

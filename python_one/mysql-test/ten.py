@@ -1,7 +1,21 @@
 import pymysql
+import requests
+#
+# db = pymysql.connect('47.95.3.32','root','123456','test')
+#
+# cursor = db.cursor()
+#
+# cursor.execute("select * from books")
+#
+# result=cursor.fetchall()
+#
+# print(result)
+#
+# db.close()
+#
 
 
-db = pymysql.connect('127.0.0.1','root','123456','test')
+db = pymysql.connect('47.95.3.32','root','123456','test')
 
 cursor = db.cursor()
 
@@ -9,7 +23,6 @@ cursor.execute("select * from books")
 
 result=cursor.fetchall()
 
-print(result)
+print(result,type(result))
 
 db.close()
-

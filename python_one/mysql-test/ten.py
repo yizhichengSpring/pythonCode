@@ -1,5 +1,5 @@
 import pymysql
-import requests
+import requestsdemo
 #
 # db = pymysql.connect('47.95.3.32','root','123456','test')
 #

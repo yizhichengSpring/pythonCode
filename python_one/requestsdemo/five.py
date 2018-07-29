@@ -1,16 +1,43 @@
 import requests
-
+import re
+from lxml import etree
 headers = {
-'Cookie': '_zap=d199b4c3-21c4-4508-ba0e-3e60f13aa5e6; d_c0="AIAncSSA9A2PToCZpnWGfkqx-ElA51pYOe0=|1532526453"; '
-          'q_c1=8795257b04b149e18d61da562636453a|1532526453000|1532526453000; '
-          'capsion_ticket="2|1:0|10:1532526465|14:capsion_ticket|44:NmJlYzYxMzM5YzFkNDg3YmI5ZjgyYzI3OWY0ZDcyYjY=|62fcffb45544c52819014418bf1be402fb44a49e319c512098639c9b02aa150f";'
-          ' z_c0="2|1:0|10:1532526467|4:z_c0|92:Mi4xa0ZUbEFRQUFBQUFBZ0NkeEpJRDBEU1lBQUFCZ0FsVk5nODFGWEFDLW91dUJ3eFlJMVpyY21kNlRHcWZOZHFfVkJR|edcefce985cf2de915a63b7d48474f0bb18ad218cc6b25ff10e41fd2f8f3e667";'
-          ' _xsrf=e0cd1078fe14c7d33af4e92cc9a3276d; __utma=51854390.1061122485.1532860553.1532860553.1532860553.1; __utmb=51854390.0.10.1532860553; '
-          '__utmc=51854390; __utmz=51854390.1532860553.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmv=51854390.100--|2=registration_date=20150723=1^3=entry_date=20150723=1',
-'Host': 'www.zhihu.com',
-'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36'
+'authority': 'www.zhipin.com',
+'method': 'GET',
+'path': '/c101010100-p100101/',
+'scheme': 'https',
+'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+'accept-encoding': 'gzip, deflate, br',
+'accept-language':"zh-CN,zh;q=0.9",
+'cache-control':'max-age=0',
+'cookie': 'sid=sem_pz_bdpc_dasou_title; lastCity=101010100; JSESSIONID=""; Hm_lvt_194df3105ad7148dcf2b98a91b5e727a=1532866950; __g=sem_pz_bdpc_dasou_title; toUrl=https%3A%2F%2Fwww.zhipin.com%2Fc101010100-p100101%2F; __c=1532866953; __l=r=https%3A%2F%2Fwww.zhipin.com%2F%3Fsid%3Dsem_pz_bdpc_dasou_title&l=%2Fwww.zhipin.com%2Fc101010100-p100101%2F&g=%2Fwww.zhipin.com%2F%3Fsid%3Dsem_pz_bdpc_dasou_ti; t=GPBUHQg2RhcUKXps; wt=GPBUHQg2RhcUKXps; Hm_lpvt_194df3105ad7148dcf2b98a91b5e727a=1532867068; __a=42616347.1532870679.1532870679.1532866953.9.2.8.9',
+'upgrade-insecure-requests': '1',
+'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36',
 }
 
 
-r = requests.get('https://www.zhihu.com',headers=headers)
-print(r.text)
+
+
+
+def parse_one_page(text):
+    html = etree.HTML(text, etree.HTMLParser())
+    #//h3/a
+    #result = html.xpath('//li[@class="item-0"]/a/text()')
+    result = html.xpath('//a/div[@class="job-title"]/text()')
+    result2 = html.xpath('//a/span[@class="red"]/text()')
+    result3 = html.xpath('//div[@class="company-text"]//h3[@class="name"]/a/text()')
+    result4 = html.xpath('//div[@class="company-text"]//p/text()')
+    # print('result', result)
+    # print('result[0]', result[0])
+    # print('result2', result2)
+    return result,result2,result3,result4
+    #print('result2[0]', result2[0])
+
+r = requests.get('https://www.zhipin.com/job_detail/?query=&scity=101010100&industry=&position=100101',headers=headers)
+#print(r.text)
+gangwei,money,name,content =parse_one_page(r.text)
+for n in range(30):
+    print(gangwei[n],money[n],name[n])
+#print(len(money))
+
+

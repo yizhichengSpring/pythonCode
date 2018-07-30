@@ -116,7 +116,7 @@ class Work(object):
 num = 1;
 while (num):
     work = Work()
-    language = work.chooseLanguage('ui')
+    language = work.chooseLanguage('java')
     work.fakerBrowser(language)
     work.getData(num,language)
     num = num + 1

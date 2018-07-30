@@ -1,6 +1,8 @@
 import requests
-import re
 from lxml import etree
+
+
+#模拟浏览器请求
 headers = {
 'authority': 'www.zhipin.com',
 'method': 'GET',
@@ -16,28 +18,26 @@ headers = {
 }
 
 
-
-
-
 def parse_one_page(text):
     html = etree.HTML(text, etree.HTMLParser())
-    #//h3/a
-    #result = html.xpath('//li[@class="item-0"]/a/text()')
     result = html.xpath('//a/div[@class="job-title"]/text()')
-    result2 = html.xpath('//a/span[@class="red"]/text()')
-    result3 = html.xpath('//div[@class="company-text"]//h3[@class="name"]/a/text()')
-    result4 = html.xpath('//div[@class="company-text"]//p/text()')
-    # print('result', result)
-    # print('result[0]', result[0])
-    # print('result2', result2)
-    return result,result2,result3,result4
-    #print('result2[0]', result2[0])
+    #薪水
+    salary = html.xpath('//a/span[@class="red"]/text()')
+    #公司名称
+    name = html.xpath('//div[@class="company-text"]//h3[@class="name"]/a/text()')
+    #详细信息
+    jobDetail = html.xpath('//div[@class="company-text"]//p')
+    #公司链接
+    href = html.xpath('//div[@class="info-primary"]//h3[@class="name"]/a/@href')
+    return result,salary,name,jobDetail,href
+
 
 r = requests.get('https://www.zhipin.com/job_detail/?query=&scity=101010100&industry=&position=100101',headers=headers)
-#print(r.text)
-gangwei,money,name,content =parse_one_page(r.text)
+prefix = 'https://www.zhipin.com'
+gangwei,money,name,content,href = parse_one_page(r.text)
 for n in range(30):
-    print(gangwei[n],money[n],name[n])
-#print(len(money))
+     jobdetail = prefix+href[n]
+     detailWork = content[n].xpath('string(.)').strip()
+     print(gangwei[n],money[n],name[n],jobdetail,detailWork)
 
 

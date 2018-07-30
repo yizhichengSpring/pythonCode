@@ -16,17 +16,24 @@ class Work(object):
     companyHref = ''
     #公司要求
     companyRequirement = ''
-    #本科数量
-    undergraduate = 0
     #发布时间
     releaseTime = ''
 
-    def fakerBrowser(self):
+
+    def chooseLanguage(self,language):
+        if language.upper() == 'JAVA':
+            return 'p100101'
+        elif language.upper() == 'PYTHON':
+            return 'p100109'
+        elif language.upper() == 'UI':
+            return 'p120105'
+
+    def fakerBrowser(self,language):
         # 模拟浏览器请求
         headers = {
             'authority': 'www.zhipin.com',
             'method': 'GET',
-            'path': '/c101010100-p100101/',
+            'path': '/c101010100-'+language+'/',
             'scheme': 'https',
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
             'accept-encoding': 'gzip, deflate, br',
@@ -58,23 +65,26 @@ class Work(object):
         return work,salary,name,jobDetail,href,requirement,releaseTime
 
 
-    def getData(self,pageNum):
-        undergraduateNum = 0
+    def getData(self,pageNum,language):
         workList = list()
         findWork = Work()
         # 获得requestheaders
-        headers = findWork.fakerBrowser()
+        headers = findWork.fakerBrowser(language)
         # 循环三次 1次30条 一次请求90条数据
         # #boss直聘默认每页显示30个岗位
         num = 30
-        r = requests.get('https://www.zhipin.com/c101010100-p100101/?page='+str(pageNum)+'&ka=page-'+str(pageNum)+'', headers=headers)
+        r = requests.get(
+            'https://www.zhipin.com/c101010100-'+language+'/?page=' + str(pageNum) + '&ka=page-' + str(pageNum) + '',
+            headers=headers)
         prefix = 'https://www.zhipin.com'
-        area, salary, companyName, companyDetails, companyHrefs,companyRequirements,releaseTimes = findWork.parse_one_page(r.text)
-        for n in range(num):
+        area, salary, companyName, companyDetails, companyHrefs, companyRequirements, releaseTimes = findWork.parse_one_page(
+            r.text)
+        for n in range(len(area)):
             companyHref = prefix + companyHrefs[n]
             companyDetail = companyDetails[n].xpath('string(.)').strip()
             companyRequirement = companyRequirements[n].xpath('string(.)').strip()
-            print(area[n] + "\t", salary[n] + "\t", companyName[n] + "\t", companyHref + "\t", companyDetail + "\t",companyRequirement+"\t",releaseTimes[n]+"\t")
+            print(area[n] + "\t", salary[n] + "\t", companyName[n] + "\t", companyHref + "\t", companyDetail + "\t",
+                  companyRequirement + "\t", releaseTimes[n] + "\t")
             workEntity = Work()
             workEntity.area = area[n]
             workEntity.salary = salary[n]
@@ -85,7 +95,7 @@ class Work(object):
             workEntity.releaseTime = releaseTimes[n]
             workList.append(workEntity)
 
-        findWork.setCsv(workList,pageNum)
+        findWork.setCsv(workList, pageNum)
 
 
     #将90条数据存进csv文件
@@ -106,7 +116,9 @@ class Work(object):
 num = 1;
 while (num):
     work = Work()
-    work.getData(num)
+    language = work.chooseLanguage('ui')
+    work.fakerBrowser(language)
+    work.getData(num,language)
     num = num + 1
     if num > 3:
         break

@@ -1,5 +1,9 @@
 @echo off
+<<<<<<< HEAD
 set "VIRTUAL_ENV=c:\github-code\pythonCode\Webprojects\venv"
+=======
+set "VIRTUAL_ENV=d:\github-code\pythonCode\Webprojects\venv"
+>>>>>>> b6c47195d68bf438d50153265b824fab6e10db61
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"

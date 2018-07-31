@@ -11,17 +11,28 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+<<<<<<< HEAD
 import pymysql
+=======
+>>>>>>> b6c47195d68bf438d50153265b824fab6e10db61
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+<<<<<<< HEAD
 pymysql.install_as_MySQLdb()
+=======
+
+>>>>>>> b6c47195d68bf438d50153265b824fab6e10db61
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = 'k#h6!3t3d64ur0q7o_%pn(%=l(%ot7qj7il_ap8lg06rou7-xt'
+=======
+SECRET_KEY = 'hya6fx7o-&mwu3@h20sk0qxrq2m6ba+r02p!py7(*t%$b(9xug'
+>>>>>>> b6c47195d68bf438d50153265b824fab6e10db61
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'app1'
+=======
+>>>>>>> b6c47195d68bf438d50153265b824fab6e10db61
 ]
 
 MIDDLEWARE = [
@@ -76,6 +90,7 @@ WSGI_APPLICATION = 'demo.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
+<<<<<<< HEAD
 
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -85,6 +100,11 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'port': '3306'
 
+=======
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+>>>>>>> b6c47195d68bf438d50153265b824fab6e10db61
     }
 }
 

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 c:\anaconda3
+=======
+d:\anaconda3
+>>>>>>> b6c47195d68bf438d50153265b824fab6e10db61

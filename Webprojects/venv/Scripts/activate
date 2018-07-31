@@ -40,7 +40,11 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+<<<<<<< HEAD
 VIRTUAL_ENV="$(if [ "$OSTYPE" "==" "cygwin" ]; then cygpath -u 'c:\github-code\pythonCode\Webprojects\venv'; else echo '/c/github-code/pythonCode/Webprojects/venv'; fi;)"
+=======
+VIRTUAL_ENV="$(if [ "$OSTYPE" "==" "cygwin" ]; then cygpath -u 'd:\github-code\pythonCode\Webprojects\venv'; else echo '/d/github-code/pythonCode/Webprojects/venv'; fi;)"
+>>>>>>> b6c47195d68bf438d50153265b824fab6e10db61
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
